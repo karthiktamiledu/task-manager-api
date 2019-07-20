@@ -24,6 +24,7 @@ router.get('/tasks', auth, async (req, res) => {
         match.completed = req.query.completed === 'true'
     }
     if (req.query.sortBy) {
+        console.log('req.query.sortBy', req.query.sortBy)
         const parts = req.query.sortBy.split(':')
         sort[parts[0]] = parts[1] === 'desc' ?  -1 : 1
     }
