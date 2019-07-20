@@ -24,22 +24,10 @@ router.get('/tasks', auth, async (req, res) => {
         match.completed = req.query.completed === 'true'
     }
 
-
-
-    var sortByStr = req.query.sortBy;
-if ((typeof sortByStr !== "undefined") && (sortByStr !== null) && (sortByStr.length > 0)) {
-    console.log('req.query.sortBy', req.query.sortBy)
-    const parts = req.query.sortBy.split(':')
-    sort[parts[0]] = parts[1] === 'desc' ?  -1 : 1
-}
-    
-
-
-    // if (req.query.sortBy) {
-    //     console.log('req.query.sortBy', req.query.sortBy)
-    //     const parts = req.query.sortBy.split(':')
-    //     sort[parts[0]] = parts[1] === 'desc' ?  -1 : 1
-    // }
+    if (req.query.sortBy) {
+        const parts = req.query.sortBy.split(':')
+        sort[parts[0]] = parts[1] === 'desc' ?  -1 : 1
+    }
 
     try {
         await req.user.populate({
